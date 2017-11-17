@@ -16,7 +16,7 @@
     background-color:#E1E1E1;
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
-    font-size: 25px;
+    font-size: 18px;
 }
 .sede{
 	margin-left: 50%;
@@ -32,4 +32,12 @@
 }
 .PercentA{
 border: 1px solid black;
+}
+.feliz, .seria, .triste{
+	width: 30%;
+	padding: 5px;
+	outline: 1px solid black;
+}
+.unidad{
+	outline: 1px solid green;
 }
