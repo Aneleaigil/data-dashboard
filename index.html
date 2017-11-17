@@ -42,36 +42,47 @@
           Editar 
         </a></div>
     </section>
-    <section>
+    <section class="container">
+      <div class="row">
       <!-- graficos -->
-    <div class="d-flex">
-      <div class="graficos-1 row">
-        <h4>INSCRITAS</h4>
-       <div class="NroA col">
-         <p>120<br>#Estudiantes actualmente inscritas</p>
-        </div>
-</div>
-        <div class="PercentA col">
-          <p>20%<br>% de abandono</p>
-        </div>
-        
-          <div class="col "></div>
-      <div class="col desertoras">
-          <img src="assets/images/bar-graph.png" alt="">
+        <div class="col desertoras">
+          <h4>INSCRITAS</h4>
+          <div class="NroA col">
+            <p>120<br>#Estudiantes actualmente inscritas</p>
+          </div>
+          <div class="PercentA col">
+            <p>20%<br>% de abandono</p>
+          </div>
+          <div id="graphic_1"></div>
         </div>
         <div class=" col promedios">
-          <img src="assets/images/bar-graph.png" alt="">
+          <h4>INSCRITAS</h4>
+          <div class="NroA col">
+            <p>120<br>#Estudiantes actualmente inscritas</p>
+          </div>
+          <div class="PercentA col">
+            <p>20%<br>% de abandono</p>
+          </div>
+          <div id="graphic_2"></div>
         </div>
         <div class=" col recomendacion">
-          <img src="assets/images/bar-graph.png" alt="">
+          <h4>INSCRITAS</h4>
+          <div class="NroA col">
+            <p>120<br>#Estudiantes actualmente inscritas</p>
+          </div>
+          <div class="PercentA col">
+            <p>20%<br>% de abandono</p>
+          </div>
+          <div id="graphic_3">
+          </div>
         </div>
       </div>
       <div class=" row nivel-tecnico-acumulado">
         <div class="col">
           <img src="assets/images/rectangular-graphic.png" alt="">
         </div>
-        <div class="col">
-          <img src="assets/images/circle-graphic.png" alt="">
+        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="col">
+          
         </div>
       </div>
       <div class=" row hse">
@@ -102,9 +113,11 @@
     <footer>
       
     </footer>
-		<!-- Base de datos -->
-		<script src="./js/data.js"></script>
-		<!-- Aquí va tus archivos JS -->
+    <!-- graficos JS -->
+    <script src="./js/graphic/highcharts.js"></script>
+    <!-- Base de datos -->
+    <script src="./js/data.js"></script>
+    <!-- Aquí va tus archivos JS -->
     <script src="./js/app.js"></script>
   </body>
 </html>
