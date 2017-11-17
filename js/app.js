@@ -4,16 +4,48 @@
 
 // Puedes hacer uso de la base de datos a través de la variable `data`
 console.log(data);
+var transformBD= function() {
+	var BD = [];
+	for (var sede in data) {
+		for(var semestre in data[sede]){
+			for(var estudiante in data[sede][semestre]["students"]){
+				for(var sprints in data[sede][semestre]["students"][estudiante]["sprints"]){
+					var notaTech = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.tech;
+					var notaHse = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.hse;
+					BD.push({
+						"sede" : sede,
+						"semestre" : semestre,
+						"estudiante" : estudiante,
+						"sprints" : sprints,
+						"notaTech" : notaTech,
+						"notaHse" : notaHse,
+					});
+				}
+			}
+		}
+	}
+	return BD;
+}
+
+var BD = [];
+BD = transformBD();
+var total= 0;
+for (var i = 0; i < BD.length; i++) {
+	if (BD[i].sprints == 1 && BD[i].sede == "SCL" && BD[i].semestre == "2017_2") {
+		total += BD[i].notaTech;
+	}
+}
+console.log(total);
 /*grafico 1*/
 Highcharts.chart('graphic_1', {
     chart: {
         type: 'column'
     },
     title: {
-    	text: '',
-	    style: {
-	        display: 'none'
-	    }
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: {
         categories: [
@@ -65,10 +97,10 @@ Highcharts.chart('graphic_2', {
         type: 'column'
     },
     title: {
-    	text: '',
-	    style: {
-	        display: 'none'
-	    }
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: {
         categories: [
@@ -120,10 +152,10 @@ Highcharts.chart('graphic_3', {
         type: 'column'
     },
     title: {
-    	text: '',
-	    style: {
-	        display: 'none'
-	    }
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: {
         categories: [
@@ -536,36 +568,3 @@ Highcharts.chart('graphic_8', {
         data: [7.0, 6.9, 9.5, 14.5]
     }]
 });
-
-var transformBD= function() {
-	var BD = [];
-	for (var sede in data) {
-		for(var semestre in data[sede]){
-			for(var estudiante in data[sede][semestre]["students"]){
-				for(var sprints in data[sede][semestre]["students"][estudiante]["sprints"]){
-					var notaTech = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.tech;
-					var notaHse = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.hse;
-					BD.push({
-						"sede" : sede,
-						"semestre" : semestre,
-						"estudiante" : estudiante,
-						"sprints" : sprints,
-						"notaTech" : notaTech,
-						"notaHse" : notaHse,
-					});
-				}
-			}
-		}
-	}
-	return BD;
-}
-
-var BD = [];
-BD = transformBD();
-var total= 0;
-for (var i = 0; i < BD.length; i++) {
-	if (BD[i].sprints == 1) {
-		total += BD[i].notaTech;
-	}
-}
-console.log(total);
