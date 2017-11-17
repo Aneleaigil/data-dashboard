@@ -90,7 +90,7 @@ function promedioHse(a, b, c){
 console.log(promedioHse(0,"SCL","2017-2"));
 
 function total(sprint, casa, bloque){
-    var total = promedioHse(sprint, casa, bloque)*0.6 + promedioTech(sprint, casa, bloque)*0.2
+    var total = promedioHse(sprint, casa, bloque)*0.6 + promedioTech(sprint, casa, bloque)*0.4
     return Math.round(total);
 }
 console.log(total(0,"SCL","2017-2"));
@@ -118,7 +118,7 @@ Highcharts.chart('graphic_1', {
     yAxis: {
         min: 0,
         title: {
-            text: 'PORCENTAJE (%)'
+            text: 'Activas (%)'
         }
     },
     tooltip: {
@@ -246,7 +246,7 @@ Highcharts.chart('graphic_2', {
 /* grafico 3*/
 Highcharts.chart('graphic_3', {
     chart: {
-        type: 'column'
+        type: 'line'
     },
     title: {
         text: '',
@@ -255,46 +255,30 @@ Highcharts.chart('graphic_3', {
         }
     },
     xAxis: {
-        categories: [
-            'S1',
-            'S2',
-            'S3',
-            'S4'
-        ],
-        crosshair: true
+        categories: ['S1', 'S2', 'S3', 'S4']
     },
     yAxis: {
-        min: 0,
         title: {
-            text: 'PORCENTAJE (%)'
+            text: 'Rendimiento (%)'
         }
     },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
     plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
         }
     },
     series: [{
         name: 'General',
-        data: [49.9, 71.5, 106.4, 129.2]
-
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
     }, {
         name: 'AM',
-        data: [83.6, 78.8, 98.5, 93.4]
-
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
     }, {
         name: 'PM',
-        data: [48.9, 38.8, 39.3, 41.4]
-
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
     }]
 });
 
@@ -398,10 +382,10 @@ Highcharts.chart('graphic_4-2', {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares at a specific website, 2014'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     plotOptions: {
         pie: {
@@ -421,14 +405,10 @@ Highcharts.chart('graphic_4-2', {
         }
     },
     series: [{
-        name: 'Brands',
+        name: 'Sprint 1',
         data: [
-            { name: 'IE', y: 56.33 },
-            { name: 'Chrome', y: 24.03 },
-            { name: 'Firefox', y: 10.38 },
-            { name: 'Safari', y: 4.77 },
-            { name: 'Opera', y: 0.91 },
-            { name: 'Other', y: 0.2 }
+            { name: 'Logrado', y: promedioTech(0,"SCL","2017-2") },
+            { name: 'NO-logrado', y: (100-promedioTech(0,"SCL","2017-2")) }
         ]
     }]
 });
@@ -533,10 +513,10 @@ Highcharts.chart('graphic_5-2', {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares at a specific website, 2014'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     plotOptions: {
         pie: {
@@ -558,12 +538,8 @@ Highcharts.chart('graphic_5-2', {
     series: [{
         name: 'Brands',
         data: [
-            { name: 'IE', y: 56.33 },
-            { name: 'Chrome', y: 24.03 },
-            { name: 'Firefox', y: 10.38 },
-            { name: 'Safari', y: 4.77 },
-            { name: 'Opera', y: 0.91 },
-            { name: 'Other', y: 0.2 }
+            { name: 'Logrado', y: promedioHse(0,"SCL","2017-2") },
+            { name: 'NO-Logrado', y: (100-promedioHse(0,"SCL","2017-2")) }
         ]
     }]
 });
@@ -574,10 +550,10 @@ Highcharts.chart('graphic_6', {
         type: 'line'
     },
     title: {
-        text: 'Monthly Average Temperature'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
@@ -607,10 +583,10 @@ Highcharts.chart('graphic_7', {
         type: 'line'
     },
     title: {
-        text: 'Monthly Average Temperature'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
@@ -639,10 +615,10 @@ Highcharts.chart('graphic_8', {
         type: 'line'
     },
     title: {
-        text: 'Monthly Average Temperature'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
