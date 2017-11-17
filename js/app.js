@@ -12,10 +12,12 @@ var transformBD= function() {
 				for(var sprints in data[sede][semestre]["students"][estudiante]["sprints"]){
 					var notaTech = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.tech;
 					var notaHse = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.hse;
+                    var activo = data[sede][semestre]["students"][estudiante]["active"];
 					BD.push({
 						"sede" : sede,
 						"semestre" : semestre,
 						"estudiante" : estudiante,
+                        "activado" : activo,
 						"sprints" : sprints,
 						"notaTech" : notaTech,
 						"notaHse" : notaHse,
@@ -29,13 +31,70 @@ var transformBD= function() {
 
 var BD = [];
 BD = transformBD();
-var total= 0;
-for (var i = 0; i < BD.length; i++) {
-	if (BD[i].sprints == 1 && BD[i].sede == "SCL" && BD[i].semestre == "2017_2") {
-		total += BD[i].notaTech;
-	}
+
+/*function promedioTech(a, b, c){
+    var sum= 0;
+    var cantidad = 0;
+    for (var i = 0; i < BD.length; i++) {
+        if (BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c) {
+            sum1= (BD[i].notaTech/100)*60;
+            cantidad +=1;
+        }
+    }
+    return (sum/cantidad);
+    console.log(sum/cantidad)
+}*/
+function activo(a, b, c){
+    var contarTotal= 0;
+    var contarTrue= 0;
+    var contarFalse = 0;
+    for (var i = 0; i < BD.length; i++){
+        if(BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c){
+            contarTotal+= 1
+            if(BD[i].activado == true) {
+                contarTrue +=1;
+            }
+            else{
+                contarFalse +=1;
+            }
+        }
+    }
+    return Math.round((contarTrue/contarTotal)*100);
 }
-console.log(total);
+function promedioTech(a, b, c){
+    var sum= 0;
+    var cantidad = 0;
+    for (var i = 0; i < BD.length; i++) {
+        if (BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c) {
+            sum+=(BD[i].notaTech/1800)*100;
+            cantidad +=1;
+        }
+    }
+    return Math.round(sum/cantidad);
+    console.log(sum/cantidad)
+}
+
+console.log(promedioTech(0,"SCL","2017-2"));
+function promedioHse(a, b, c){
+    var sum= 0;
+    var cantidad = 0;
+    for (var i = 0; i < BD.length; i++) {
+        if (BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c) {
+            sum+=(BD[i].notaHse/1200)*100;
+            cantidad +=1;
+        }
+    }
+    return Math.round(sum/cantidad);
+    console.log(sum/cantidad)
+}
+console.log(promedioHse(0,"SCL","2017-2"));
+
+function total(sprint, casa, bloque){
+    var total = promedioHse(sprint, casa, bloque)*0.6 + promedioTech(sprint, casa, bloque)*0.2
+    return Math.round(total);
+}
+console.log(total(0,"SCL","2017-2"));
+/*console.log(total(1,"SCL","2017-2"));*/
 /*grafico 1*/
 Highcharts.chart('graphic_1', {
     chart: {
@@ -78,21 +137,59 @@ Highcharts.chart('graphic_1', {
     },
     series: [{
         name: 'General',
-        data: [49.9, 71.5, 106.4, 129.2]
+        data: [activo(0, "SCL", "2017-2"), activo(1, "SCL", "2017-2"), activo(2, "SCL", "2017-2"), activo(3, "SCL", "2017-2")]
 
     }, {
         name: 'AM',
-        data: [83.6, 78.8, 98.5, 93.4]
+        data: [activo(0, "SCL", "2017-2"), activo(1, "SCL", "2017-2"), activo(2, "SCL", "2017-2"), activo(3, "SCL", "2017-2")]
 
     }, {
         name: 'PM',
-        data: [48.9, 38.8, 39.3, 41.4]
+        data: [activo(0, "SCL", "2017-2"), activo(1, "SCL", "2017-2"), activo(2, "SCL", "2017-2"), activo(3, "SCL", "2017-2")]
 
     }]
 });
 
 /* grafico 2*/
 Highcharts.chart('graphic_2', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '',
+        style: {
+            display: 'none'
+        }
+    },
+    xAxis: {
+        categories: ['S1', 'S2', 'S3', 'S4']
+    },
+    yAxis: {
+        title: {
+            text: 'Rendimiento (%)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'General',
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
+    }, {
+        name: 'AM',
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
+    }, {
+        name: 'PM',
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
+    }]
+});
+
+/*Highcharts.chart('graphic_2', {
     chart: {
         type: 'column'
     },
@@ -133,19 +230,19 @@ Highcharts.chart('graphic_2', {
     },
     series: [{
         name: 'General',
-        data: [49.9, 71.5, 106.4, 129.2]
+        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
 
     }, {
         name: 'AM',
-        data: [83.6, 78.8, 98.5, 93.4]
+        data: [total(0,"SCL","2017-2"), total(1,"SCL","2017-2"), total(2,"SCL","2017-2"), total(3,"SCL","2017-2")]
 
     }, {
         name: 'PM',
-        data: [48.9, 38.8, 39.3, 41.4]
+        data: [total(0,"SCL","2017-2"), total(1,"SCL","2017-2"), total(2,"SCL","2017-2"), total(3,"SCL","2017-2")]
 
     }]
 });
-
+*/
 /* grafico 3*/
 Highcharts.chart('graphic_3', {
     chart: {
@@ -471,7 +568,7 @@ Highcharts.chart('graphic_5-2', {
     }]
 });
 
-/*grqafico 5*/
+/*grqafico 6*/
 Highcharts.chart('graphic_6', {
     chart: {
         type: 'line'
