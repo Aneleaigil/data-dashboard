@@ -1,3 +1,35 @@
-/*
- * Estilos de tu proyecto
- */
+/* estilo del header*/
+
+.container{
+	outline: 1px solid red;
+ }
+.logo{
+	width: 15%;
+	margin-left: 40%;
+}
+.idioma {
+	margin-left: 90%;
+
+}
+.menu{
+   padding: 30px;
+    background-color:#E1E1E1;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+}
+.sede{
+	margin-left: 50%;
+	outline: 1px solid red;
+	padding-top: 0px;
+}
+.graficos-1{
+	padding-top:10%;
+
+}
+.NroA{
+	border: 1px solid black;
+}
+.PercentA{
+border: 1px solid black;
+}
