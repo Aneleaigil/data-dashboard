@@ -29,9 +29,15 @@
 }
 .NroA{
 	border: 1px solid black;
+	background-color: #FFC107;
+	margin:10px;
+	text-align: center;
+	
 }
 .PercentA{
 border: 1px solid black;
+background-color: #FFC107;
+
 }
 .feliz, .seria, .triste{
 	width: 30%;
@@ -40,4 +46,8 @@ border: 1px solid black;
 }
 .unidad{
 	outline: 1px solid green;
+}
+.NroB{
+	font-size: 20PX;
+	font-weight: bolder;
 }
