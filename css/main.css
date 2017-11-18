@@ -24,7 +24,7 @@
 	padding-top: 0px;
 }
 .graficos-1{
-	padding-top:10%;
+	padding-top:15%;
 
 }
 .NroA{
@@ -37,17 +37,26 @@
 .PercentA{
 border: 1px solid black;
 background-color: #FFC107;
+text-align: center;
 
 }
 .feliz, .seria, .triste{
-	width: 30%;
-	padding: 5px;
+	width: 10%;
+	height: 10%
+	padding: 15px;
 	outline: 1px solid black;
 }
-.unidad{
+.unidad a{
 	outline: 1px solid green;
+	margin-right: 100px;
+
 }
 .NroB{
 	font-size: 20PX;
 	font-weight: bolder;
+	text-align: center;
+
+}
+.desertoras{
+	text-align: center;
 }
