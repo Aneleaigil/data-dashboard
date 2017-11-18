@@ -28,22 +28,63 @@ var transformBD= function() {
 	}
 	return BD;
 }
+var transformBD_2 = function(){
+    var BDR = [];
+    for(var sede in data){
+        for(var semestre in data[sede]){
+            for(var rating in data[sede][semestre]["ratings"]){
+                var jedi = data[sede][semestre]["ratings"][rating].jedi;
+                var promoter = data[sede][semestre]["ratings"][rating].nps.promoters;
+                var passive = data[sede][semestre]["ratings"][rating].nps.passive;
+                var detractor = data[sede][semestre]["ratings"][rating].nps.detractors;
+                // var sprint = data[sede][semestre]["ratings"][rating].sprint;
+                var noCumple = data[sede][semestre]["ratings"][rating].student["no-cumple"];
+                var cumple = data[sede][semestre]["ratings"][rating].student["cumple"];
+                var supera = data[sede][semestre]["ratings"][rating].student["supera"];
+                var teacher = data[sede][semestre]["ratings"][rating].teacher;
+                BDR.push({
+                    "sede" : sede,
+                    "semestre" : semestre,
+                    "jedi" : jedi,
+                    "sprint" : rating,
+                    "teacher" : teacher,
+                    "no-cumple" : noCumple,
+                    "cumple" : cumple,
+                    "supera" : supera,
+                    "nps-promoter" : promoter,
+                    "nps-passive" : passive,
+                    "nps-detractor" : detractor
+                })
+            }
+        }
+    }
+    return BDR;
+} 
 
 var BD = [];
 BD = transformBD();
+var BDR = [];
+BDR = transformBD_2();
 
-/*function promedioTech(a, b, c){
-    var sum= 0;
-    var cantidad = 0;
-    for (var i = 0; i < BD.length; i++) {
-        if (BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c) {
-            sum1= (BD[i].notaTech/100)*60;
-            cantidad +=1;
+function promediosTech(a,b,c){
+    var todos = [];
+    for(var i = 0; i < BD.length; i++){
+        if(BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c){
+            todos.push((BD[i].notaTech/1800)*100)
         }
     }
-    return (sum/cantidad);
-    console.log(sum/cantidad)
-}*/
+    return todos;
+}
+
+function promediosHse(a,b,c){
+    var todos = [];
+    for(var i = 0; i < BD.length; i++){
+        if(BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c){
+            todos.push((BD[i].notaHse/1200)*100)
+        }
+    }
+    return todos;
+}
 function activo(a, b, c){
     var contarTotal= 0;
     var contarTrue= 0;
@@ -62,39 +103,66 @@ function activo(a, b, c){
     return Math.round((contarTrue/contarTotal)*100);
 }
 function promedioTech(a, b, c){
-    var sum= 0;
-    var cantidad = 0;
-    for (var i = 0; i < BD.length; i++) {
-        if (BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c) {
-            sum+=(BD[i].notaTech/1800)*100;
-            cantidad +=1;
-        }
-    }
+    var sum= math.sum(promediosTech(a,b,c));
+    var cantidad = promediosTech(a,b,c).length;
     return Math.round(sum/cantidad);
-    console.log(sum/cantidad)
 }
 
-console.log(promedioTech(0,"SCL","2017-2"));
 function promedioHse(a, b, c){
-    var sum= 0;
-    var cantidad = 0;
-    for (var i = 0; i < BD.length; i++) {
-        if (BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c) {
-            sum+=(BD[i].notaHse/1200)*100;
-            cantidad +=1;
-        }
-    }
+    var sum= math.sum(promediosHse(a,b,c));
+    var cantidad = promediosHse(a,b,c).length;
     return Math.round(sum/cantidad);
-    console.log(sum/cantidad)
 }
-console.log(promedioHse(0,"SCL","2017-2"));
+
 
 function total(sprint, casa, bloque){
     var total = promedioHse(sprint, casa, bloque)*0.6 + promedioTech(sprint, casa, bloque)*0.4
     return Math.round(total);
 }
-console.log(total(0,"SCL","2017-2"));
-/*console.log(total(1,"SCL","2017-2"));*/
+
+function nps(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i]["nps-promoter"] - BDR[i]["nps-detractor"];
+        }
+    }
+}
+function jedi(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i].jedi;
+        }
+    }
+}
+function teacher(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i].teacher;
+        }
+    }
+}
+function cumple(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i].cumple;
+        }
+    }
+}
+function noCumple(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i]["no-cumple"];
+        }
+    }
+}
+function supera(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i].supera;
+        }
+    }
+}
+
 /*grafico 1*/
 Highcharts.chart('graphic_1', {
     chart: {
@@ -189,60 +257,6 @@ Highcharts.chart('graphic_2', {
     }]
 });
 
-/*Highcharts.chart('graphic_2', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: '',
-        style: {
-            display: 'none'
-        }
-    },
-    xAxis: {
-        categories: [
-            'S1',
-            'S2',
-            'S3',
-            'S4'
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'PORCENTAJE (%)'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'General',
-        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
-
-    }, {
-        name: 'AM',
-        data: [total(0,"SCL","2017-2"), total(1,"SCL","2017-2"), total(2,"SCL","2017-2"), total(3,"SCL","2017-2")]
-
-    }, {
-        name: 'PM',
-        data: [total(0,"SCL","2017-2"), total(1,"SCL","2017-2"), total(2,"SCL","2017-2"), total(3,"SCL","2017-2")]
-
-    }]
-});
-*/
 /* grafico 3*/
 Highcharts.chart('graphic_3', {
     chart: {
@@ -272,13 +286,13 @@ Highcharts.chart('graphic_3', {
     },
     series: [{
         name: 'General',
-        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
+        data: [nps(0, "SCL", "2017-2"), nps(1, "SCL", "2017-2"), nps(2, "SCL", "2017-2"), nps(3, "SCL", "2017-2")]
     }, {
         name: 'AM',
-        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
+        data: [nps(0,"SCL","2017-2"),nps(1,"SCL","2017-2") ,nps(2,"SCL","2017-2") ,nps(3,"SCL","2017-2") ]
     }, {
         name: 'PM',
-        data: [total(0,"SCL","2017-2"),total(1,"SCL","2017-2") ,total(2,"SCL","2017-2") ,total(3,"SCL","2017-2") ]
+        data: [nps(0,"SCL","2017-2"),nps(1,"SCL","2017-2") ,nps(2,"SCL","2017-2") ,nps(3,"SCL","2017-2") ]
     }]
 });
 
@@ -288,10 +302,10 @@ Highcharts.chart('graphic_4-1', {
         zoomType: 'xy'
     },
     title: {
-        text: 'Average Monthly Temperature and Rainfall in Tokyo'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: [{
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -407,8 +421,9 @@ Highcharts.chart('graphic_4-2', {
     series: [{
         name: 'Sprint 1',
         data: [
-            { name: 'Logrado', y: promedioTech(0,"SCL","2017-2") },
-            { name: 'NO-logrado', y: (100-promedioTech(0,"SCL","2017-2")) }
+            { name: 'Logrado', y: cumple(0,"SCL","2017-2") },
+            { name: 'Superado', y: supera(0,"SCL","2017-2") },
+            { name: 'NO-Logrado', y: noCumple(0,"SCL","2017-2") }
         ]
     }]
 });
@@ -419,10 +434,10 @@ Highcharts.chart('graphic_5-1', {
         zoomType: 'xy'
     },
     title: {
-        text: 'Average Monthly Temperature and Rainfall in Tokyo'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: '',
+        style: {
+            display: 'none'
+        }
     },
     xAxis: [{
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -593,7 +608,7 @@ Highcharts.chart('graphic_7', {
     },
     yAxis: {
         title: {
-            text: 'Temperature (°C)'
+            text: 'Promedio'
         }
     },
     plotOptions: {
@@ -605,8 +620,8 @@ Highcharts.chart('graphic_7', {
         }
     },
     series: [{
-        name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5]
+        name: 'General',
+        data: [teacher(0, "SCL", "2017-2"), teacher(1, "SCL", "2017-2"), teacher(2, "SCL", "2017-2"), teacher(3, "SCL", "2017-2")]
     }]
 });
 /*grafico 8*/
@@ -625,7 +640,7 @@ Highcharts.chart('graphic_8', {
     },
     yAxis: {
         title: {
-            text: 'Temperature (°C)'
+            text: 'Promedio (%)'
         }
     },
     plotOptions: {
@@ -638,6 +653,6 @@ Highcharts.chart('graphic_8', {
     },
     series: [{
         name: 'Tokyo',
-        data: [7.0, 6.9, 9.5, 14.5]
+        data: [jedi(0, "SCL", "2017-2"), jedi(1, "SCL", "2017-2"), jedi(2, "SCL", "2017-2"), jedi(3, "SCL", "2017-2")]
     }]
 });
