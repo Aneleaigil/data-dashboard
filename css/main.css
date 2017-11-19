@@ -1,22 +1,106 @@
-/* estilo del header*/
-
-.container{
+/* modificando header, nuestra cabeza de la pagina*/
+/*.container{
 	outline: 1px solid red;
+ }*/
+ .cabeza{
+ 	overflow: hidden;
  }
 .logo{
 	width: 15%;
+	display: inline-block;
 	margin-left: 40%;
+	margin-top: 2%; 
 }
 .idioma {
-	margin-left: 90%;
+	border: none;
+	margin-top: 5%;
+	margin-bottom: 1%; 
+	float: right;
 
 }
+.idioma:focus{
+	outline-style: none;
+}
+
+/*section segunda parte, navegador*/ 
+.fondo{
+	background: #ffc107;
+	overflow: hidden;
+}
 .menu{
-   padding: 30px;
-    background-color:#E1E1E1;
+    padding: 2%;
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
     font-size: 18px;
+    color: #fff;
+}
+.nav-link{
+	color: #000;
+}
+.editar{
+	float: right;
+}
+#navEditar{
+	position: fixed;
+	z-index: 5;
+}
+.lista{
+	outline: 1px solid #ffc107;
+	background: #fff;
+	width: 200%;
+}
+.buscar{
+	float: left;
+	font-size: 18px;
+}
+
+/* tercera parte que se divida en varias section*/
+/*primera*/
+.fondo2{
+	background: #fbe9b2;
+	padding-bottom: 3%;
+	padding-top: 3%;
+}
+.col{
+	background: #fff;
+	border-radius: 10px;
+	margin: 1%; 
+}
+.NroA{
+	margin: 4%;
+	background: #fbe9b2;
+	text-align: center;
+	font-size: 10px;
+	border-radius: 10px;
+	
+}
+/*segunda*/
+.nivelTech{
+	background: #fff;
+	border-radius: 10px;
+	margin: 1%; 
+}
+.nivelHse{
+	background: #fff;
+	border-radius: 10px;
+	margin: 1%;
+}
+.NroB{
+	font-size: 20PX;
+	font-weight: bolder;
+	text-align: center;
+
+}
+.NroC{
+	margin: 4%;
+	background: #fbe9b2;
+	text-align: center;
+	font-size: 15px;
+}
+.autoevaluacion{
+	background: #fff;
+	border-radius: 10px;
+	margin: 1%;
 }
 .sede{
 	margin-left: 50%;
@@ -27,13 +111,6 @@
 	padding-top:15%;
 
 }
-.NroA{
-	border: 1px solid black;
-	background-color: #FFC107;
-	margin:10px;
-	text-align: center;
-	
-}
 .PercentA{
 border: 1px solid black;
 background-color: #FFC107;
@@ -41,20 +118,12 @@ text-align: center;
 
 }
 .feliz, .seria, .triste{
-	width: 10%;
-	height: 10%
-	padding: 15px;
+	width: 80%;
 	outline: 1px solid black;
 }
 .unidad a{
 	outline: 1px solid green;
 	margin-right: 100px;
-
-}
-.NroB{
-	font-size: 20PX;
-	font-weight: bolder;
-	text-align: center;
 
 }
 .desertoras{
