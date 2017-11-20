@@ -1,4 +1,4 @@
-function sedes(){
+function editar(){
 	/*creamos elementos y nodos*/
 	var contenedor = document.getElementById("navEditar")
 	var lista = document.createElement("div");

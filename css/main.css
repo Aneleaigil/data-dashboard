@@ -24,7 +24,7 @@
 
 /*section segunda parte, navegador*/ 
 .fondo{
-	background: #ffc107;
+	background: #FFC107;
 	overflow: hidden;
 }
 .menu{
@@ -32,10 +32,14 @@
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
     font-size: 18px;
-    color: #fff;
+    color: white;
 }
 .nav-link{
 	color: #000;
+}
+
+.nav-link:hover{
+	color:#FFFFFF;
 }
 .editar{
 	float: right;
@@ -57,22 +61,23 @@
 /* tercera parte que se divida en varias section*/
 /*primera*/
 .fondo2{
-	background: #fbe9b2;
+	background:#333333;
 	padding-bottom: 3%;
 	padding-top: 3%;
+	text-align: center;
 }
 .col{
 	background: #fff;
 	border-radius: 10px;
 	margin: 1%; 
 }
+
 .NroA{
-	margin: 4%;
-	background: #fbe9b2;
+    padding-bottom: 3%;
+	background:#F9A91A;
 	text-align: center;
 	font-size: 10px;
-	border-radius: 10px;
-	
+	border-radius: 10px;	
 }
 /*segunda*/
 .nivelTech{
@@ -86,14 +91,14 @@
 	margin: 1%;
 }
 .NroB{
-	font-size: 20PX;
+	font-size: 15px;
 	font-weight: bolder;
 	text-align: center;
 
 }
 .NroC{
 	margin: 4%;
-	background: #fbe9b2;
+	background: #F9A91A;
 	text-align: center;
 	font-size: 15px;
 }
@@ -113,19 +118,41 @@
 }
 .PercentA{
 border: 1px solid black;
-background-color: #FFC107;
+background-color: #F9A91A;
 text-align: center;
 
 }
 .feliz, .seria, .triste{
 	width: 80%;
-	outline: 1px solid black;
+	
 }
 .unidad a{
 	outline: 1px solid green;
 	margin-right: 100px;
-
 }
 .desertoras{
 	text-align: center;
 }
+.txt{
+font-size: 15px;
+}
+.txt2{
+	margin-top: 3%;
+	font-size: 15px;
+	font-weight: bolder;
+}
+.promedios{
+	text-align: center;
+}
+.col-7{
+	text-align: center;
+}
+.autoevaluacion{
+	text-align: center;
+}
+.c268, .c281, .c430{
+	width: 100%;
+	
+}
+
+
