@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:900,400" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   </head>
   <body>
     <header>
@@ -13,41 +14,40 @@
         <div class="logo">
           <img src="assets/images/logo-laboratoria.svg" alt="">
         </div>
-        <!-- <div class="idioma nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="sedes()" >Sede </a>
-        </div> -->
+    
+
         <select name="select" class="idioma nav-item dropdown">
           <option value="" disabled selected hidden>Idioma</option>
-          <option value="value1">Ingles</option>
-          <option value="value2">Español</option> 
+          <option value="value1">Español</option>
+          <option value="value2">Ingles</option> 
           <option value="value3">Portugues</option>
         </select>
+ </header>
       </div>
     </header> 
     <section class="fondo">
       <div class="container">
         <ul class="menu nav justify-content-center">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">VISTA GENERAL</a>
+            <a class="nav-link active" href="#">VISTA GENERAL</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="estudiantes.html">ESTUDIANTES</a>
+            <a class="nav-link" href="#">ESTUDIANTES</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">PROFESORES</a>
           </li>
         </ul>
         <div class="nav-item dropdown buscar">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="buscar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> SANTIAGO DE CHILE 2017-II </a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="buscar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Santiago de Chile </a>
           <div id="navBuscador">
           </div>
         </div>
-        <select name="select" class="editar nav-item dropdown">
-          <option value="" disabled selected hidden>Editar Datos</option>
-          <option value="value1">Add Student</option>
-          <option value="value2">Remove Student</option> 
-          <option value="value3">Add Sprint</option>
-        </select>
+        <div class="nav-item dropdown editar">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="editar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Editar </a>
+          <div id="navEditar">
+          </div>
+        </div>
       </div>
     </section>
     <section class="fondo2">
@@ -58,10 +58,10 @@
             <h4>Inscritas</h4>
             <div class="row">
               <div class="NroA col">
-                <span class="NroB" id="studentInscritas"></span><p>Estudiantes actualmente inscritas</p>
+                <span class="NroB">120</span><p class="txt">Estudiantes actualmente inscritas</p>
               </div>
               <div class="NroA col">
-                <span class="NroB" id="studentInactivos"></span><p class="txt">% de abandono</p>
+                <span class="NroB">20%</span><p class="txt">% de abandono</p>
               </div>
             </div>
             <div id="graphic_1" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
@@ -70,10 +70,10 @@
             <h4>Promedio Notas TECH + HSE</h4>
             <div class="row">
               <div class="NroA col">
-                <span class="NroB" id="studentSuperan"></span><p class="txt">#Estudiantes que alcanza el objetivo</p>
+                <span class="NroB">160</span><p class="txt">#Promedio notas de estudiantes</p>
               </div>
               <div class="NroA col">
-                <span class="NroB" id="promedioSprint"></span><p class="txt">% promedio general  notas estudiantes</p>
+                <span class="NroB">65%</span><p class="txt">% promedio general  notas estudiantes</p>
               </div>
             </div>
             <div id="graphic_2" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
@@ -82,10 +82,10 @@
             <h4>Net promote score</h4>
             <div class="row">
               <div class="NroA col">
-                <span class="NroB">80</span><p class="txt"># Estudiantes dentro del promedio de la clase</p>
+                <span class="NroB">70%</span><p class="txt">% Acumulado</p>
               </div>
               <div class="NroA col">
-                <span class="NroB">65</span><p class="txt"># Estudiantes alcanzaron el puntaje meta de (70%)</p>
+               <span class="txt2">60%</span><span class="txt2"> promotoras<br>20% seguidoras<br>10% detractoras</span>
               </div>
             </div>
             <div id="graphic_3" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
@@ -99,10 +99,10 @@
               <h4>Promedio de Notas TECH</h4>
               <div class="row">
                 <div class="NroA col">
-                  <p class="NroB">100</p><p class="NroC">#Estudiantes dentro del promedio de la clase</p>
+                  <span class="NroB">100</span><p class="NroC">#Estudiantes dentro del promedio de la clase</p>
                 </div>
                 <div class="NroA col">
-                  <p class="NroB">20</p><p class="NroC"> Estudiantes que alcanzaron el puntaje meta</p>
+                  <span class="NroB">20</span><p class="NroC"> Estudiantes que alcanzaron el puntaje meta</p>
                 </div>
               </div>
               <div id="graphic_4-1"></div>
@@ -116,14 +116,16 @@
       <section class="fondo2">
         <div class="container">
           <div class=" row hse nivelHse">
-            <div class="col-7">
+            <div class=" col-7">
               <h4>Promedio de Notas HSE</h4>
               <div class="row">
                 <div class="NroA col">
-                  <p class="NroB">70%</p><p class="NroC">% Acumulado </p>
+                  <span class="NroB">80</span> 
+                  <p class="NroC"># Alumnas que estan dentro del promedio de la clase</p>
                 </div>
                 <div class="NroA col">
-                  <p>60% promotoras<br>20% seguidoras<br>10% detractoras</p>
+                   <span class="NroB">65</span>
+                   <p class="txt"># Estudiantes alcanzaron el puntaje meta de (70%)</p> 
                 </div>
               </div>
               <div id="graphic_5-1">
@@ -142,31 +144,29 @@
               <h4>Satisfaccion</h4>
               <div class="row">
                 <div class="NroA col">
-                  <p class="NroB">140%</p><p class="txt">logran y exceden las expectativas (promedio acumulado)</p>
+                  <span class="NroB">140%</span><p class="txt">Logran y exceden las expectativas (promedio acumulado)</p>
                 </div>
                 </div>
-              <div id="graphic_6" style="min-width: 310px; height: 300px; margin: 0 auto">
-              </div>
+              <div id="graphic_6" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+            
             </div>
             <div class="col">
               <h4>Ranking profesores</h4>
               <div class="row">
                 <div class="NroA col">
-                  <p class="NroB">4.2</p><p class="txt">Puntaje general de los profesores(acumulado)</p>
+                  <span class="NroB">4.2</span><p class="txt">Puntaje general de los profesores(acumulado)</p>
                 </div>
               </div>
-              <div id="graphic_7" style="min-width: 310px; height: 300px; margin: 0 auto">
-              </div>
+              <div id="graphic_7" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
             </div>
             <div class="col">
               <h4>Ranking Jedi-Master</h4>
               <div class="row">
                 <div class="NroA col">
-                  <p class="NroB">50</p><p class="txt">Puntaje general de los profesores(acumulado)</p>
+                  <span class="NroB">50</span><p class="txt">Puntaje general de los profesores(acumulado)</p>
                 </div>
               </div>
-              <div id="graphic_8" style="min-width: 310px; height: 300px; margin: 0 auto">
-              </div>
+              <div id="graphic_8" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
             </div>
           </div>
         </div>
@@ -175,28 +175,51 @@
         <div class="container">
           <div class="autoevaluacion row">
             <div class="col">
+              <!--menu de unidad desplegable-->
+               <!--menu de sprint-->
+         <select name="select" class="sprint nav-item dropdown">
+          <option value="" disabled selected hidden>Sprint</option>
+          <option value="value1">Unidad 1</option>
+          <option value="value2">Unidad 2</option> 
+          <option value="value3">Unidad 3</option>
+        </select>
+
+         <select name="select" class="unidad nav-item dropdown">
+          <option value="" disabled selected hidden>Unidad</option>
+          <option value="value1">Unidad 1</option>
+          <option value="value2">Unidad 2</option> 
+          <option value="value3">Unidad 3</option>
+        </select>
+       
               <h4>Autoevaluación Alumnas</h4>
               <div class="row">
                 <div class="col">
                   <div class="NroA">
+                    <!--iconos de laboratoria para autoevaluación-->
                     <span class="NroB">70%</span>
-                    <p>% Alumnas sin dificultad</p>
+                    <p class="txt">% Alumnas sin dificultad</p>
                   </div>
-                  <img class='feliz' src="assets/images/feliz.png">
+                  <span class="feliz">
+                  <svg class="c268 c281 c430" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm1-10.06L14.06 11l1.06-1.06L16.18 11l1.06-1.06-2.12-2.12zm-4.12 0L9.94 11 11 9.94 8.88 7.82 6.76 9.94 7.82 11zM12 17.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path></svg></span>
                 </div>
                 <!--div class="txt2 col"><p>20%</p><p>% Alumnas con cierta dificultad</p></div>-->
                 <div class="col">
                   <div class="NroA">
-                    <span class="NroB">20%</span><p>% Alumnas con cierta dificultad</p>
+                    <span class="NroB">20%</span><p class="txt">% Alumnas con cierta dificultad</p>
                   </div>
-                  <img class='seria' src="assets/images/seria.png">
+                   <span class="seria">
+                 <svg class="c268 c281 c430" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14h6v1.5H9z"></path><circle cx="15.5" cy="9.5" r="1.5"></circle><circle cx="8.5" cy="9.5" r="1.5"></circle><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path></svg></span>
+
+
                 </div>
                 <!--div class="txt3 col"><p>10%</p><p>% Alumnas con muchas dudas</p></div>-->
                 <div class="col">
                   <div class="NroA">
-                    <span class="NroB">10%</span><p>% Alumnas mucha dificultad</p>
+                    <span class="NroB">10%</span><p class="txt">% Alumnas con mucha dificultad</p>
                   </div>
-                  <img class='triste' src="assets/images/triste.png">
+                   <span class="seria">
+                  <svg class="c268 c281 c430" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10S22 17.53 22 12 17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm4.18-12.24l-1.06 1.06-1.06-1.06L13 8.82l1.06 1.06L13 10.94 14.06 12l1.06-1.06L16.18 12l1.06-1.06-1.06-1.06 1.06-1.06zM7.82 12l1.06-1.06L9.94 12 11 10.94 9.94 9.88 11 8.82 9.94 7.76 8.88 8.82 7.82 7.76 6.76 8.82l1.06 1.06-1.06 1.06zM12 14c-2.33 0-4.31 1.46-5.11 3.5h10.22c-.8-2.04-2.78-3.5-5.11-3.5z"></path></svg></span>
+                 
                 </div> 
               </div>
             </div>
@@ -206,6 +229,8 @@
           </div>
         </div>
       </div>
+      <!--span class="C280"></span-->
+      
     </section>
     <footer>
       
@@ -219,5 +244,6 @@
     <!-- Aquí va tus archivos JS -->
     <script src="./js/graphic.js"></script>
     <script src="./js/app.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
   </body>
 </html>
