@@ -309,7 +309,7 @@ Highcharts.chart('graphic_1', {
             display: 'none'
         }
     },
-    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    colors: ['#f9a91a', '#A4A4A4', '#333333', '#910000', '#1aadce', 
     '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: [
