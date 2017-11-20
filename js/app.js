@@ -130,3 +130,28 @@ var promedioNotas = function(casa, bloque){
 
 promedioNotas("SCL", "2017-2")
 
+/*datos de nps*/
+var promedioNps = function(casa, bloque){
+	var estudiante = document.getElementById("npsPromedio");
+	var nota0 = nps(0,casa, bloque);
+	var nota1 = nps(1,casa, bloque);
+	var nota2 = nps(2,casa, bloque);
+	var nota3 = nps(3,casa, bloque);
+	var cantidad = evaluar(nota0) +evaluar(nota1)+evaluar(nota2)+evaluar(nota3)
+	console.log(cantidad)
+	var cantidadSprint = sprintRealizados(casa,bloque);
+	estudiante.textContent = Math.round(cantidad/cantidadSprint);
+}
+promedioNps("SCL", "2017-2")
+
+var estudiantesPromoter = function(casa, bloque){
+	var estudiante = document.getElementById("studentPromoter");
+	estudiante.textContent = promoter("SCL", "2017-2");
+}
+estudiantesPromoter("SCL", "2017-2")
+
+var estudiantesPasive = function(casa, bloque){
+	var estudiante = document.getElementById("studentPasive");
+	estudiante.textContent = pasive("SCL", "2017-2");
+}
+estudiantesPasive("SCL", "2017-2")

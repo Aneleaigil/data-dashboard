@@ -83,7 +83,7 @@ BD = transformBD();
 console.log(BD);
 var BDR = [];
 BDR = transformBD_2();
-
+/*estudiantes activos, inscritos*/
 function estudiantes(casa, bloque){
     var estudiante = [];
     for(var i = 0; i < BD.length; i++){
@@ -104,6 +104,7 @@ function estudiantesEstadoActivos(casa, bloque){
     }
     return estudiante;
 }
+
 function abandonaron(casa, bloque){
     var estadoEstudiante = estudiantesEstadoActivos(casa, bloque);
     var estudianteQueAbandonaron = 0;
@@ -124,6 +125,36 @@ function activos(casa, bloque){
     }
     return Math.round(estudianteQueAbandonaron*100/estadoEstudiante.length);
 }
+/*pensar como dejar el primero al tope*/
+function activo(sprint,casa,bloque){
+    var contarTotal= estudiantesEstadoActivos(casa, bloque);
+    var contarTrue= 0;
+    var contarFalse = 0;
+    if(sprint < sprintRealizados(casa,bloque) && 0 != sprintRealizados(casa,bloque)){
+        for (var i = 0; i < contarTotal.length; i++){
+            if(contarTotal[i] == true){
+                    contarTrue +=1;
+            }else{
+                    contarFalse +=1;
+            }
+        }
+        
+    }else if(sprint == 0){
+        return 100
+    }
+    return Math.round((contarTrue/contarTotal.length)*100);
+}
+
+/*promedio de notas por sprint y general, logros*/
+function sprintRealizados(casa,bloque){
+    var cantidadSprint = 0;
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sede == casa && BDR[i].semestre == bloque && cantidadSprint < BDR[i].sprint){
+            cantidadSprint = BDR[i].sprint;
+        }
+    }
+    return parseInt(cantidadSprint) + 1;
+}
 function promediosTech(sprint,casa,bloque){
     var todos = [];
     for(var i = 0; i < BD.length; i++){
@@ -143,41 +174,25 @@ function promediosHse(sprint,casa,bloque){
     }
     return todos;
 }
-function activo(sprint,casa,bloque){
-    var contarTotal= 0;
-    var contarTrue= 0;
-    var contarFalse = 0;
-    for (var i = 0; i < BD.length; i++){
-        if(BD[i].sprints == sprint && BD[i].sede == casa && BD[i].semestre == bloque){
-            contarTotal+= 1
-            if(BD[i].activado == true) {
-                contarTrue +=1;
-            }
-            else{
-                contarFalse +=1;
-            }
-        }
-    }
-    return Math.round((contarTrue/contarTotal)*100);
-}
-function promedioTech(a, b, c){
-    var sum= math.sum(promediosTech(a,b,c));
-    var cantidad = promediosTech(a,b,c).length;
+
+function promedioTech(sprint, casa, bloque){
+    var sum= math.sum(promediosTech(sprint,casa,bloque));
+    var cantidad = promediosTech(sprint, casa, bloque).length;
     return Math.round(sum/cantidad);
 }
 
-function promedioHse(a, b, c){
-    var sum= math.sum(promediosHse(a,b,c));
-    var cantidad = promediosHse(a,b,c).length;
+function promedioHse(sprint, casa, bloque){
+    var sum= math.sum(promediosHse(sprint, casa, bloque));
+    var cantidad = promediosHse(sprint, casa, bloque).length;
     return Math.round(sum/cantidad);
 }
 
 
 function total(sprint, casa, bloque){
-    var total = promedioHse(sprint, casa, bloque)*0.6 + promedioTech(sprint, casa, bloque)*0.4
+    var total = promedioHse(sprint, casa, bloque)*0.4 + promedioTech(sprint, casa, bloque)*0.6
     return Math.round(total);
 }
-console.log(total(0, "SCL", "2017-2"))
+
 function estudiantesPromedioObjetivos(sprint, casa, bloque){
     var promediosT=promediosTech(sprint, casa, bloque);
     var promediosH=promediosHse(sprint, casa, bloque);
@@ -187,7 +202,39 @@ function estudiantesPromedioObjetivos(sprint, casa, bloque){
     }
     return promedioEstudiantes;
 }
-console.log(estudiantesPromedioObjetivos(0, "SCL", "2017-2"));
+
+/*NPS promedio recomendabilidad de los estudiantes*/
+function nps(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i]["nps-promoter"] - BDR[i]["nps-detractor"];
+        }
+    }
+}
+
+function promoter(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i]["nps-promoter"];
+        }
+    }
+}
+function passive(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i]["nps-passive"];
+        }
+    }
+}
+function detractor(sprint,casa,bloque){
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
+            return BDR[i]["nps-detractor"];
+        }
+    }
+}
+
+/*objetivo alcanzado por sprint y fracuencia de promedios*/
 function promedioSuperanObjetivo(sprint, casa, bloque){
     var promedios=estudiantesPromedioObjetivos(sprint, casa, bloque);
     var superado=[]
@@ -198,23 +245,7 @@ function promedioSuperanObjetivo(sprint, casa, bloque){
     }
     return superado.length
 }
-function sprintRealizados(casa,bloque){
-    var cantidadSprint = 0;
-    for(var i = 0; i < BDR.length; i++){
-        if(BDR[i].sede == casa && BDR[i].semestre == bloque && cantidadSprint < BDR[i].sprint){
-            cantidadSprint = BDR[i].sprint;
-        }
-    }
-    return parseInt(cantidadSprint) + 1;
-}
-console.log(sprintRealizados("SCL","2017-2"))
-function nps(sprint,casa,bloque){
-    for(var i = 0; i < BDR.length; i++){
-        if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
-            return BDR[i]["nps-promoter"] - BDR[i]["nps-detractor"];
-        }
-    }
-}
+
 function jedi(sprint,casa,bloque){
     for(var i = 0; i < BDR.length; i++){
         if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
