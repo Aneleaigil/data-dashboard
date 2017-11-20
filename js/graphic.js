@@ -9,12 +9,29 @@ var transformBD= function() {
 	for (var sede in data) {
 		for(var semestre in data[sede]){
 			for(var estudiante in data[sede][semestre]["students"]){
+
+                if (typeof data[sede][semestre]["students"][estudiante]["sprints"] == "undefined" || data[sede][semestre]["students"][estudiante]["sprints"].length == 0) {
+                    var activo = data[sede][semestre]["students"][estudiante]["active"];
+                    var nombre = data[sede][semestre]["students"][estudiante]["name"];
+                    BD.push({
+                        "sede" : sede,
+                        "nombre" : nombre,
+                        "semestre" : semestre,
+                        "estudiante" : estudiante,
+                        "activado" : activo,
+                        "sprints" : -1,
+                        "notaTech" : 0,
+                        "notaHse" : 0,
+                    });
+                }
 				for(var sprints in data[sede][semestre]["students"][estudiante]["sprints"]){
 					var notaTech = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.tech;
 					var notaHse = data[sede][semestre]["students"][estudiante]["sprints"][sprints].score.hse;
                     var activo = data[sede][semestre]["students"][estudiante]["active"];
+                    var nombre = data[sede][semestre]["students"][estudiante]["name"];
 					BD.push({
-						"sede" : sede,
+                        "sede" : sede,
+						"nombre" : nombre,
 						"semestre" : semestre,
 						"estudiante" : estudiante,
                         "activado" : activo,
@@ -63,34 +80,75 @@ var transformBD_2 = function(){
 
 var BD = [];
 BD = transformBD();
+console.log(BD);
 var BDR = [];
 BDR = transformBD_2();
 
-function promediosTech(a,b,c){
+function estudiantes(casa, bloque){
+    var estudiante = [];
+    for(var i = 0; i < BD.length; i++){
+        if(BD[i].sede == casa && BD[i].semestre == bloque && (BD[i].sprints == 1 || BD[i].sprints == -1)){
+            estudiante.push(BD[i].estudiante)
+        }
+    }
+    return estudiante;
+
+}
+
+function estudiantesEstadoActivos(casa, bloque){
+    var estudiante = [];
+    for(var i = 0; i < BD.length; i++){
+        if(BD[i].sede == casa && BD[i].semestre == bloque && (BD[i].sprints == 1 || BD[i].sprints == -1)){
+            estudiante.push(BD[i].activado)
+        }
+    }
+    return estudiante;
+}
+function abandonaron(casa, bloque){
+    var estadoEstudiante = estudiantesEstadoActivos(casa, bloque);
+    var estudianteQueAbandonaron = 0;
+    for(var i = 0; i < estadoEstudiante.length; i++){
+        if(estadoEstudiante[i]==false){
+            estudianteQueAbandonaron += 1;
+        }
+    }
+    return Math.round(estudianteQueAbandonaron*100/estadoEstudiante.length);
+}
+function activos(casa, bloque){
+    var estadoEstudiante = estudiantesEstadoActivos(casa, bloque);
+    var estudianteQueAbandonaron = 0;
+    for(var i = 0; i < estadoEstudiante.length; i++){
+        if(estadoEstudiante[i]== true){
+            estudianteQueAbandonaron += 1;
+        }
+    }
+    return Math.round(estudianteQueAbandonaron*100/estadoEstudiante.length);
+}
+function promediosTech(sprint,casa,bloque){
     var todos = [];
     for(var i = 0; i < BD.length; i++){
-        if(BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c){
+        if(BD[i].sprints == sprint && BD[i].sede == casa && BD[i].semestre == bloque){
             todos.push(Math.round((BD[i].notaTech/1800)*100))
         }
     }
     return todos;
 }
 
-function promediosHse(a,b,c){
+function promediosHse(sprint,casa,bloque){
     var todos = [];
     for(var i = 0; i < BD.length; i++){
-        if(BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c){
+        if(BD[i].sprints == sprint && BD[i].sede == casa && BD[i].semestre == bloque){
             todos.push(Math.round((BD[i].notaHse/1200)*100))
         }
     }
     return todos;
 }
-function activo(a, b, c){
+function activo(sprint,casa,bloque){
     var contarTotal= 0;
     var contarTrue= 0;
     var contarFalse = 0;
     for (var i = 0; i < BD.length; i++){
-        if(BD[i].sprints == a && BD[i].sede == b && BD[i].semestre == c){
+        if(BD[i].sprints == sprint && BD[i].sede == casa && BD[i].semestre == bloque){
             contarTotal+= 1
             if(BD[i].activado == true) {
                 contarTrue +=1;
@@ -119,7 +177,37 @@ function total(sprint, casa, bloque){
     var total = promedioHse(sprint, casa, bloque)*0.6 + promedioTech(sprint, casa, bloque)*0.4
     return Math.round(total);
 }
-
+console.log(total(0, "SCL", "2017-2"))
+function estudiantesPromedioObjetivos(sprint, casa, bloque){
+    var promediosT=promediosTech(sprint, casa, bloque);
+    var promediosH=promediosHse(sprint, casa, bloque);
+    var promedioEstudiantes=[];
+    for (var i=0; i < promediosT.length; i++){
+         promedioEstudiantes.push(Math.round(promediosT[i]*0.6+promediosH[i]*0.4))
+    }
+    return promedioEstudiantes;
+}
+console.log(estudiantesPromedioObjetivos(0, "SCL", "2017-2"));
+function promedioSuperanObjetivo(sprint, casa, bloque){
+    var promedios=estudiantesPromedioObjetivos(sprint, casa, bloque);
+    var superado=[]
+    for(var i=0; i<promedios.length; i++){
+        if (promedios[i] >= 70){
+            superado.push(promedios[i])
+        }
+    }
+    return superado.length
+}
+function sprintRealizados(casa,bloque){
+    var cantidadSprint = 0;
+    for(var i = 0; i < BDR.length; i++){
+        if(BDR[i].sede == casa && BDR[i].semestre == bloque && cantidadSprint < BDR[i].sprint){
+            cantidadSprint = BDR[i].sprint;
+        }
+    }
+    return parseInt(cantidadSprint) + 1;
+}
+console.log(sprintRealizados("SCL","2017-2"))
 function nps(sprint,casa,bloque){
     for(var i = 0; i < BDR.length; i++){
         if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
@@ -149,23 +237,38 @@ function noCumple(sprint,casa,bloque){
         }
     }
 }
-/*function promedioSatisfaccion(sprint,casa,bloque){
+function promedioSatisfaccion(sprint,casa,bloque){
+    var promedios = []
     for(var i = 0; i < BDR.length; i++){
         if(BDR[i].sprint == sprint && BDR[i].sede == casa && BDR[i].semestre == bloque){
-            console.log(BDR[i].supera)
-            return BDR[i].supera + BDR[i].cumple;
+            promedios.push(BDR[i].supera + BDR[i].cumple)           
         }
     }
+    return promedios;
 }
-console.log(promedioSatisfaccion(1,"SCL","2017_2"))
 function promedioSatisfaccionAcumulada(sprint,casa,bloque){
     var sum= math.sum(promedioSatisfaccion(sprint,casa,bloque));
     var cantidad = promedioSatisfaccion(sprint,casa,bloque).length;
     return Math.round(sum/cantidad);
 }
-*/
+function promedioSprint(sprint,casa,bloque){
+    var promedios = promediosTech(sprint,casa,bloque);
+    var frecuencia = {};
+    for(var cantidadPromedios in promedios){
+        if(typeof frecuencia[promedios[cantidadPromedios]] == "undefined"){
+            frecuencia[promedios[cantidadPromedios]] = 1;
+        }else{
+            frecuencia[promedios[cantidadPromedios]] += 1;
+        }
+    }
+    return frecuencia;
+}
+
 /*grafico 1*/
 Highcharts.chart('graphic_1', {
+    credits: {
+      enabled: false
+    },
     chart: {
         type: 'column'
     },
@@ -175,6 +278,8 @@ Highcharts.chart('graphic_1', {
             display: 'none'
         }
     },
+    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: [
             'S1',
@@ -221,6 +326,9 @@ Highcharts.chart('graphic_1', {
 
 /* grafico 2*/
 Highcharts.chart('graphic_2', {
+    credits: {
+      enabled: false
+    },
     chart: {
         type: 'line'
     },
@@ -230,6 +338,8 @@ Highcharts.chart('graphic_2', {
             display: 'none'
         }
     },
+    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
     },
@@ -260,6 +370,9 @@ Highcharts.chart('graphic_2', {
 
 /* grafico 3*/
 Highcharts.chart('graphic_3', {
+    credits: {
+      enabled: false
+    },
     chart: {
         type: 'line'
     },
@@ -269,6 +382,8 @@ Highcharts.chart('graphic_3', {
             display: 'none'
         }
     },
+    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
     },
@@ -297,8 +412,12 @@ Highcharts.chart('graphic_3', {
     }]
 });
 
+
 /*grafico 4.1*/
 Highcharts.chart('graphic_4-1', {
+    credits: {
+      enabled: false
+    },
     chart: {
         zoomType: 'xy'
     },
@@ -308,88 +427,39 @@ Highcharts.chart('graphic_4-1', {
             display: 'none'
         }
     },
+    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: [{
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: Object.keys(promedioSprint(0,"SCL","2017-2")),
         crosshair: true
     }],
     yAxis: [{ // Primary yAxis
         labels: {
-            format: '{value}°C',
             style: {
                 color: Highcharts.getOptions().colors[1]
             }
         },
         title: {
-            text: 'Temperature',
+            text: 'Alumnas',
             style: {
                 color: Highcharts.getOptions().colors[1]
             }
         }
-    }, { // Secondary yAxis
-        title: {
-            text: 'Rainfall',
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
-        },
-        labels: {
-            format: '{value} mm',
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
-        },
-        opposite: true
     }],
-    tooltip: {
-        shared: true
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 120,
-        verticalAlign: 'top',
-        y: 100,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    series: [{
-        name: 'Rainfall',
+    series: [
+    {
+        name: 'cantidad',
         type: 'column',
-        yAxis: 1,
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-        tooltip: {
-            valueSuffix: ' mm'
-        }
-
-    }, {
-        name: 'Temperature',
-        type: 'spline',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-        tooltip: {
-            valueSuffix: '°C'
-        }
+        data: Object.values(promedioSprint(0,"SCL","2017-2")),
     }]
 });
 
 /*grafico 4.2*/
-
-// Make monochrome colors
-var pieColors = (function () {
-    var colors = [],
-        base = Highcharts.getOptions().colors[0],
-        i;
-
-    for (i = 0; i < 10; i += 1) {
-        // Start out with a darkened base color (negative brighten), and end
-        // up with a much brighter color
-        colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
-    }
-    return colors;
-}());
-
 // Build the chart
 Highcharts.chart('graphic_4-2', {
+    credits: {
+      enabled: false
+    },
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -406,7 +476,8 @@ Highcharts.chart('graphic_4-2', {
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
-            colors: pieColors,
+            colors: ['#f9a91a', '#f5c979', '#89A54E', '#80699B', '#3D96AE', 
+   '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92'],
             dataLabels: {
                 enabled: true,
                 format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
@@ -430,6 +501,9 @@ Highcharts.chart('graphic_4-2', {
 
 /*grafico 5.1*/
 Highcharts.chart('graphic_5-1', {
+    credits: {
+      enabled: false
+    },
     chart: {
         zoomType: 'xy'
     },
@@ -521,6 +595,9 @@ var pieColors = (function () {
 
 // Build the chart
 Highcharts.chart('graphic_5-2', {
+    credits: {
+      enabled: false
+    },
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -561,6 +638,9 @@ Highcharts.chart('graphic_5-2', {
 
 /*grqafico 6*/
 Highcharts.chart('graphic_6', {
+    credits: {
+      enabled: false
+    },
     chart: {
         type: 'line'
     },
@@ -588,12 +668,15 @@ Highcharts.chart('graphic_6', {
     },
     series: [{
         name: 'General',
-        data: [0, 1,2, 3]
+        data: [promedioSatisfaccionAcumulada(0,"SCL","2017-2"), promedioSatisfaccionAcumulada(1,"SCL","2017-2"), promedioSatisfaccionAcumulada(2,"SCL","2017-2"), promedioSatisfaccionAcumulada(3,"SCL","2017-2")]
     }]
 });
 
 /*grafico 7*/
 Highcharts.chart('graphic_7', {
+    credits: {
+      enabled: false
+    },
     chart: {
         type: 'line'
     },
@@ -626,6 +709,9 @@ Highcharts.chart('graphic_7', {
 });
 /*grafico 8*/
 Highcharts.chart('graphic_8', {
+    credits: {
+      enabled: false
+    },
     chart: {
         type: 'line'
     },
@@ -674,6 +760,9 @@ var pieColors = (function () {
 
 // Build the chart
 Highcharts.chart('graphic_9', {
+    credits: {
+      enabled: false
+    },
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
