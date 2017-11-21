@@ -1,0 +1,139 @@
+*{
+	margin:0;
+	padding: 0;
+}
+.cabeza{
+ 	overflow: hidden;
+ }
+.logo{
+	width: 15%;
+	display: inline-block;
+	margin-left: 40%;
+	margin-top: 2%; 
+}
+.idioma {
+	margin-top: 5%;
+	margin-bottom: 2%; 
+	float: right;
+	margin-top: 5%;
+	margin-bottom: 2%; 
+	float: right;
+	border:  2px solid #F9A91A;
+	border-radius: 10%; 
+	color: #F9A91A;
+	padding: 0.4%;
+	text-align: center;
+
+}
+.idioma:focus{
+	outline-style: none;
+}
+
+/*section segunda parte, navegador*/ 
+
+.fondo{
+	background: #FFC107;
+	overflow: hidden;
+}
+.menu{
+    padding: 2%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 18px;
+    color: white;
+}
+.nav-item:{
+	border-bottom-color: #7f5406;
+}
+.nav-link{
+	color: #000;
+}
+
+.nav-link:hover{
+	color:#FFFFFF;
+	text-decoration-color: #000 !important;
+}
+.editar{
+	background: #FFC107;
+	border: none; 
+	float: right;
+}
+.editar:focus{
+	outline-style: none;
+}
+.editar option{
+	background: #FFF;
+}
+
+.buscar{
+	float: left;
+	font-size: 18px;
+}
+
+#navBuscador{
+	position: fixed;
+	z-index: 5;
+}
+#navEditar{
+	position: fixed;
+	z-index: 5;
+
+}
+/*parte html estudiantes*/
+.buscador{
+	float: right;
+	padding: 30px;
+	
+}
+
+.tarjeta{
+	padding: 12px;
+}
+.card{
+	border: none!important;
+	background-color:#F7F7F7 !important;
+	padding: 5px;
+}
+.custom-control-indicator{
+	background-color:#F9A91A !important; 
+}
+.card-title{
+	text-align: center;
+}
+.notasTech{
+	background-color:#F9A91A;
+	font-size:16px;
+	font-weight: bold;
+	width: 30%;
+	text-align: center;
+	padding: 1%;
+	margin-bottom: 5%;
+	display: inline-block;
+}
+.notasHse{
+	background-color:#F9A91A;
+	font-size:16px;
+	font-weight: bold;
+	width: 30%;
+	text-align: center;
+	padding: 1%;
+	display: inline-block;
+}
+.nota{
+	font-size: 20px;
+}
+.menuH{
+	padding: 30px;
+	
+}
+.btn{
+	background-color: #F9A91A !important;
+	border: none !important;
+}
+.Alumnas{
+	padding-top: 30px;
+}
+.card-img-top{
+	width: 70% !important;
+
+}

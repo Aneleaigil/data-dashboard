@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Data Dashboard</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main2.css">
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:900,400" rel="stylesheet">
   </head>
@@ -13,9 +13,7 @@
         <div class="logo">
           <img src="assets/images/logo-laboratoria.svg" alt="">
         </div>
-        <!-- <div class="idioma nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="sedes()" >Sede </a>
-        </div> -->
+       <!--Boton de idioma-->
         <select name="select" class="idioma nav-item dropdown">
           <option value="" disabled selected hidden>Idioma</option>
           <option value="value1">Ingles</option>
@@ -38,7 +36,7 @@
           </li>
         </ul>
         <div class="nav-item dropdown buscar">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="buscar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> SANTIAGO DE CHILE 2017-II </a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="buscar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> SPRINT I </a>
           <div id="navBuscador">
           </div>
         </div>
@@ -49,6 +47,87 @@
         </div>
       </div>
     </section>
+    <!--section 2 buscador-->
+    <section>
+   <div class=" buscador col-lg-6">
+    <div class="input-group">
+     <input type="text" class="form-control" placeholder="buscar..." aria-label="Search for..." >
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true" ::before></i></button>
+      </span>
+    </div>
+  </div>
+</div>
+<!--section 3 Menu de estudiantes-->
+<section>
+  <div class="menuH">
+  <button type="button" class="btn btn-primary btn-lg">Javascript</button>
+<button type="button" class="btn btn-secondary btn-lg">Diseñador UX</button>
+<button type="button" class="btn btn-secondary btn-lg">FrondEnd</button>
+</div>
+        
+</section>
+
+<!--section 4  Ficha Alumnas-->
+<section class="Alumnas">
+<div class="card-deck">
+<div class="card">
+  <img class="card-img-top" src="assets/images/estudiante1.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-title">Donna Sloper</h4>
+      <h5>Estudiante Javascript</h4>
+        <span>Activa</span>
+        <a href="">Ver Perfil</a>
+  <div class="notasTech">
+  <span class="nota">1213</span>
+  <p class="title2">Notas Tecnicas</p>
+  </div>
+  <div class="notasHse">
+  <span class="nota">854</span>
+  <p class="title2">Notas HSE</p>
+
+  </div>
+    </div>
+  </div>
+
+  <div class="card">
+  <img class="card-img-top" src="assets/images/estudiante2.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-title">Roana Menego</h4>
+      <h5>Estudiante Javascript</h4>
+        <span>Inactiva</span>
+        <a href="">Ver Perfil</a>
+  <div class="notasTech">
+    <span class="nota">1114</span>
+  <p class="title2">Notas Tecnicas</p>
+  </div>
+
+  <div class="notasHse">
+    <span class="nota">894</span>
+    <span class="title2">Notas HSE</span>
+      </div>
+  </div>
+</div>
+
+  <div class="card">
+  <img class="card-img-top" src="assets/images/estudiante3.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-title">Jillene Porch</h4>
+      <h5>Estudiante Javascript</h4>
+        <span>Activa</span>
+        <a href="">Ver Perfil</a>
+  <div class="notasTech">
+    <span class="nota">976</span>
+  <p class="title2">Notas Tecnicas</p>
+  
+  </div>
+  <div class="notasHse">
+      <span class="nota">979</span>
+  <p class="title2">Notas HSE</p>
+    </div>
+  </div>
+</div>
+</section>
     
     <!-- funciones math -->
     <script src="./js/math_js/math.js"></script>
@@ -59,5 +138,7 @@
     <!-- Aquí va tus archivos JS -->
     <script src="./js/graphic.js"></script>
     <script src="./js/app.js"></script>
+    <!--enlace a iconos-->
+    <script src="http://use.fontawesome.com/7873633050.js"></script>
   </body>
 </html>

@@ -369,7 +369,7 @@ Highcharts.chart('graphic_2', {
             display: 'none'
         }
     },
-    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    colors: ['#f9a91a', '#A4A4A4', '#333333', '#910000', '#1aadce', 
     '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
@@ -413,7 +413,7 @@ Highcharts.chart('graphic_3', {
             display: 'none'
         }
     },
-    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    colors: ['#A4A4A4', '#f9a91a', '#333333', '#910000', '#1aadce', 
     '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
@@ -458,7 +458,7 @@ Highcharts.chart('graphic_4-1', {
             display: 'none'
         }
     },
-    colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    colors: ['#A4A4A4', '#333333', '#8bbc21', '#910000', '#1aadce', 
     '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: [{
         categories: Object.keys(promedioSprint(0,"SCL","2017-2")),
@@ -544,6 +544,8 @@ Highcharts.chart('graphic_5-1', {
             display: 'none'
         }
     },
+     colors: ['#A4A4A4', '#333333', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: [{
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -646,6 +648,8 @@ Highcharts.chart('graphic_5-2', {
             allowPointSelect: true,
             cursor: 'pointer',
             colors: pieColors,
+            colors: ['#A4A4A4', '#33333', '#89A54E', '#80699B', '#3D96AE', 
+            '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92'],
             dataLabels: {
                 enabled: true,
                 format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
@@ -681,6 +685,8 @@ Highcharts.chart('graphic_6', {
             display: 'none'
         }
     },
+     colors: ['#A4A4A4', '#333333', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
     },
@@ -717,6 +723,8 @@ Highcharts.chart('graphic_7', {
             display: 'none'
         }
     },
+     colors: ['#A4A4A4', '#333333', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
     },
@@ -752,6 +760,8 @@ Highcharts.chart('graphic_8', {
             display: 'none'
         }
     },
+     colors: ['#A4A4A4', '#333333', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
     xAxis: {
         categories: ['S1', 'S2', 'S3', 'S4']
     },
@@ -811,6 +821,8 @@ Highcharts.chart('graphic_9', {
             allowPointSelect: true,
             cursor: 'pointer',
             colors: pieColors,
+             colors: ['#F9A91A', '#FBE9B2', '#89A54E', '#80699B', '#3D96AE', 
+            '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92'],
             dataLabels: {
                 enabled: true,
                 format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
