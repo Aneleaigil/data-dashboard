@@ -57,14 +57,14 @@ document.getElementById("cadaSprintHse").addEventListener("change", function() {
 	var e = document.getElementById("sprint");
 	var casa = e.options[e.selectedIndex].getAttribute("data-casa");
 	var bloque = e.value;
-	var a = document.getElementById("cadaSprintHse");;
+	var a = document.getElementById("cadaSprintHse");
 	var sprint = a.value;
 
 	// Actualizar Resultados
-	cantidadEstudianteSuperanObjetivoHse(sprint, casa,bloque);
-	promedioEstudianteSuperanObjetivoHse(sprint, casa,bloque);
 	grafico5_1(sprint, casa, bloque);
 	grafico5_2(sprint, casa, bloque);
+	cantidadEstudianteSuperanObjetivoHse(sprint, casa,bloque);
+	promedioEstudianteSuperanObjetivoHse(sprint, casa,bloque);
 
 });
 

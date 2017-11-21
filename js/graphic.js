@@ -654,7 +654,7 @@ function grafico4_2(sprint,casa, bloque){
 
 grafico4_2(0,"SCL", "2017-2")
 /*grafico 5.1*/
-function grafico5_1(casa,bloque){
+function grafico5_1(sprint, casa,bloque){
     Highcharts.chart('graphic_5-1', {
         credits: {
           enabled: false
@@ -691,14 +691,14 @@ function grafico5_1(casa,bloque){
         {
             name: 'cantidad',
             type: 'column',
-            data: cantidadPromediosSprintHse(0,casa, bloque),
+            data: cantidadPromediosSprintHse(sprint,casa, bloque),
         }]
     });
 }
-grafico5_1("SCL","2017-2")
+grafico5_1(0,"SCL","2017-2")
 /*grafico 5.2*/
 
-function grafico5_2(casa,bloque){
+function grafico5_2(sprint, casa,bloque){
     // Make monochrome colors
     var pieColors = (function () {
         var colors = [],
@@ -751,13 +751,13 @@ function grafico5_2(casa,bloque){
         series: [{
             name: 'Brands',
             data: [
-                { name: 'Logrado', y: promedioSprintHse(0, casa,bloque) },
-                { name: 'NO-Logrado', y: (100-promedioSprintHse(0, casa,bloque)) }
+                { name: 'Logrado', y: promedioSprintHse(sprint, casa,bloque) },
+                { name: 'NO-Logrado', y: (100-promedioSprintHse(sprint, casa,bloque)) }
             ]
         }]
     });
 }
-grafico5_2("SCL","2017-2")
+grafico5_2(0,"SCL","2017-2")
 /*grqafico 6*/
 function grafico6(casa, bloque){
     Highcharts.chart('graphic_6', {
