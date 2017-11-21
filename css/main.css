@@ -57,6 +57,8 @@
 	background: #FFC107;
 	border: none; 
 	float: right;
+	font-weight: bold;
+
 }
 .editar:focus{
 	outline-style: none;
@@ -72,14 +74,20 @@
 .buscar{
 	float: left;
 	font-size: 18px;
+	font-weight: bold;
+
 }
 
 #sprint{
 	margin-bottom: 2%;
 }
+#nombre_sede{
+	font-weight: bold;
+}
 .sedeSprint{
 	background: #FFC107;
 	border: none; 
+	font-weight: bold;
 }
 .sedeSprint:focus{
 	outline-style: none;

@@ -37,14 +37,23 @@
           </li>
         </ul>
 
-        <div class="nav-item dropdown buscar">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="buscar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> SPRINT I </a>
-          <div id="navBuscador">
-          </div>
+       <div class="menu-sprint">
+          <select name="select" class="sprintStudent nav-item dropdown">
+          <option value="" disabled selected hidden>Sprint</option>
+          <option value="value1">Agregar Estudiante</option>
+          <option value="value2">Remover Estudiante</option> 
+          <option value="value3">Agregar Sprint</option>
+        </select>
         </div>
-        <div class="nav-item dropdown editar">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" onclick="editar()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Editar </a>
-          <div id="navEditar">
+
+        <div class="menu-editar">
+          <select name="select" class="editar nav-item dropdown">
+          <option value="" disabled selected hidden>Editar</option>
+          <option value="value1">Sprint 1</option>
+          <option value="value2">Sprint 2</option> 
+          <option value="value3">Sprint 3</option>
+        </select>
+        </div>
           </div>
         </div>
       </div>
@@ -72,6 +81,7 @@
 
 <!--section 4  Ficha Alumnas-->
 <section class="Alumnas">
+  <div class="container">
 <div class="card-deck">
 <div class="card">
   <img class="card-img-top" src="assets/images/estudiante1.jpg" alt="Card image cap">
@@ -124,6 +134,7 @@
   <p class="title2">Notas HSE</p>
     </div>
   </div>
+</div>
 </div>
 </section>
     
