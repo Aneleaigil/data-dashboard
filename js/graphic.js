@@ -792,7 +792,7 @@ function grafico6(casa, bloque){
             }
         },
         series: [{
-            name: 'General',
+            name: 'Promedio General',
             data: [promedioSatisfaccion(0,casa,bloque), promedioSatisfaccion(1,casa,bloque), promedioSatisfaccion(2,casa,bloque), promedioSatisfaccion(3,casa,bloque)]
         }]
     });
@@ -832,7 +832,7 @@ function grafico7(casa,bloque){
             }
         },
         series: [{
-            name: 'General',
+            name: 'Promedio General',
             data: [teacher(0, casa,bloque), teacher(1, casa,bloque), teacher(2, casa,bloque), teacher(3, casa,bloque)]
         }]
     });
@@ -872,7 +872,7 @@ function grafico8(casa,bloque){
             }
         },
         series: [{
-            name: 'Tokyo',
+            name: 'Promedio General',
             data: [jedi(0, casa,bloque), jedi(1, casa,bloque), jedi(2, casa,bloque), jedi(3, casa,bloque)]
         }]
     });

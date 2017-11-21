@@ -42,16 +42,16 @@
     font-size: 18px;
     color: white;
 }
-.nav-item:{
-	border-bottom-color: #7f5406;
+.nav-item{
+	border-bottom-color: #7f5406; 
 }
 .nav-link{
 	color: #000;
 }
 
 .nav-link:hover{
-	color:#FFFFFF;
-	text-decoration-color: #000 !important;
+	color: #FFFFFF;
+	text-decoration-color: #000 !important; 
 }
 .editar{
 	background: #FFC107;
@@ -73,10 +73,6 @@
 	float: left;
 	font-size: 18px;
 }
-
-#sprint{
-	margin-bottom: 2%;
-}
 .sedeSprint{
 	background: #FFC107;
 	border: none; 
@@ -86,6 +82,10 @@
 }
 .sedeSprint option{
 	background: #FFF;
+}
+
+#sprint{
+	margin-bottom: 2%;
 }
 /* tercera parte que se divida en varias section*/
 /*primera*/
