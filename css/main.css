@@ -74,15 +74,19 @@
 	font-size: 18px;
 }
 
-#navBuscador{
-	position: fixed;
-	z-index: 5;
+#sprint{
+	margin-bottom: 2%;
 }
-#navEditar{
-	position: fixed;
-	z-index: 5;
+.sedeSprint{
+	background: #FFC107;
+	border: none; 
 }
-
+.sedeSprint:focus{
+	outline-style: none;
+}
+.sedeSprint option{
+	background: #FFF;
+}
 /* tercera parte que se divida en varias section*/
 /*primera*/
 
@@ -212,6 +216,8 @@ font-size: 15px;
 
 }
 
-
+select, h4{
+	display: inline-block;	
+}
 
 
