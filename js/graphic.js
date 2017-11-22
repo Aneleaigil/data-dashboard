@@ -133,7 +133,6 @@ function activos(casa, bloque){
     var estadoEstudiante = estudiantesEstadoActivos(casa, bloque);
     return Math.round(cantidadActivos(casa, bloque)*100/estadoEstudiante.length);
 }
-/*pensar como dejar el primero al tope*/
 function activo(casa,bloque){
     var estadoEstudiante = estudiantesEstadoActivos(casa, bloque);
     var lista = []
@@ -162,7 +161,6 @@ function activo(casa,bloque){
     }
     return lista;
 }
-console.log(activo("SCL","2017-2"))
 
 /*promedio de notas por sprint y general, logros*/
 function sprintRealizados(casa,bloque){
@@ -271,7 +269,7 @@ function estudiantesPromedioObjetivosTech(sprint, casa, bloque){
     }
     return promedioEstudiantes;
 }
-console.log(estudiantesPromedioObjetivosTech(0, "SCL", "2017-2"))
+
 function promedioSuperanObjetivoTech(sprint, casa, bloque){
     var promedios=estudiantesPromedioObjetivosTech(sprint, casa, bloque);
     var superado=[]
@@ -285,7 +283,6 @@ function promedioSuperanObjetivoTech(sprint, casa, bloque){
 function promedioSprintTech(sprint, casa, bloque){
     return Math.round(promedioSuperanObjetivoTech(sprint, casa, bloque)*100/estudiantesPromedioObjetivosTech(sprint, casa, bloque).length)
 }
-console.log(promedioSprintTech(0, "SCL", "2017-2"))
 function cantidadPromediosSprintTech(sprint,casa,bloque){
     var promedios = promediosTech(sprint,casa,bloque);
     var frecuencia = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -323,7 +320,7 @@ function estudiantesPromedioObjetivosHse(sprint, casa, bloque){
     }
     return promedioEstudiantes;
 }
-console.log(estudiantesPromedioObjetivosHse(0, "SCL", "2017-2"))
+
 function promedioSuperanObjetivoHse(sprint, casa, bloque){
     var promedios=estudiantesPromedioObjetivosHse(sprint, casa, bloque);
     var superado=[]
@@ -334,11 +331,11 @@ function promedioSuperanObjetivoHse(sprint, casa, bloque){
     }
     return superado.length
 }
-console.log(promedioSuperanObjetivoHse(0, "SCL", "2017-2"))
+
 function promedioSprintHse(sprint, casa, bloque){
     return Math.round(promedioSuperanObjetivoHse(sprint, casa, bloque)*100/estudiantesPromedioObjetivosHse(sprint, casa, bloque).length)
 }
-console.log(promedioSprintHse(0, "SCL", "2017-2"))
+
 function cantidadPromediosSprintHse(sprint,casa,bloque){
     var promedios = promediosHse(sprint,casa,bloque);
     var frecuencia = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
